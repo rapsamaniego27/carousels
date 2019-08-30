@@ -1,0 +1,38 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html, body{
+  padding: 0;
+  margin: 0;
+}
+
+.slick{
+  display: flex;
+}
+
+#slideshow .slick{
+  margin: auto;
+  width:80%;
+  object-fit: none;
+  object-position: 50% 50%;
+  object-position: 0 0;
+  max-height: 300px;
+  min-height: 150px;
+}
+
+#slideshow img{
+  width:100%;
+  height: auto;
+}
+
+/* .slick-prev {
+  left: 100px;
+  background: red; 
+}
+.slick-next {
+  right: 100px;
+  background: red; 
+} */
+
