@@ -8,18 +8,19 @@ html, body{
   margin: 0;
 }
 
-.slick{
+/* .slick{
   display: flex;
+} */
+
+.wrap{
+  object-fit: fill;
+  max-height: 300px;
+  
 }
 
 #slideshow .slick{
   margin: auto;
   width:80%;
-  object-fit: none;
-  object-position: 50% 50%;
-  object-position: 0 0;
-  max-height: 300px;
-  min-height: 150px;
 }
 
 #slideshow img{
