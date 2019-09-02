@@ -1,46 +1,67 @@
-// const carouselSlide = document.querySelector('.carousel-slide');
-// const carouselImages = document.querySelectorAll('.carousel-wrap');
+const slideshow = document.querySelector('.slideshow');
+      slick = document.querySelector('.slick'),
+      slickTrack = document.querySelector('.slick-track'),
+      slickList = document.querySelector('.slick-list');
 
-// const prevBtn = document.querySelector('#prevBtn');
-// const nextBtn = document.querySelector('#nextBtn');
+let slides = document.querySelectorAll(".slick-slide:not(.cloned)"),
+    slideCount = slides.length;
 
-// let counter = 0;
-// const width =  carouselImages[0].clientWidth;
+console.log(slides);
 
-// nextBtn.addEventListener('click', function(){
-//   carouselSlide.style.transition = "transform 0.4s ease-in-out";
-//   counter++;
-//   carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
-  
-// });
+const cloneFirst = slides[0].cloneNode(true),
+      cloneLast = slides[slides.length - 1].cloneNode(true);
 
-const slideshow = document.querySelector('.slideshow')
-const slick = document.querySelector('.slick');
-const slickTrack = document.querySelector('.slick-track');
-const slides = document.querySelectorAll('.slick-slide');
+      slickTrack.appendChild(cloneFirst);
+      
+      slickTrack.insertBefore(cloneLast, slides[0]);
+
+      // Re declare variables
+const totalSlides = document.querySelectorAll('.slick-slide'),
+      totalSlideCount = totalSlides.length;
+      
+      totalSlides[0].classList.add('cloned');
+      totalSlides[totalSlides.length - 1].classList.add('cloned');
 
 function resize(){
-  
+
 //slickTrack width 
-slickTrack.style.transform = `translate3d(${slick.clientWidth}px, 0, 0)`;
+slickTrack.style.transform = `translate3d(-${slick.clientWidth}px, 0, 0)`;
 
 //total slickTrack width
-slickTrack.style.width = `${slick.clientWidth*5}px`;
+slickTrack.style.width = `${slick.clientWidth*totalSlideCount}px`;
 
-// slickTrack.style.transform = `translate3d(${slick.clientWidth}, 0, 0)`;
-// slides.forEach(function(slide){
-//   console.log(slide.style.transform = `translate3d(${slick.clientWidth}, 0, 0)`);
-// });
+totalSlides.forEach(function(slide){
+  // console.log(slide.style.transform = `translate3d(${slick.clientWidth}, 0, 0)`);
+  slide.style.width = `${slick.clientWidth}px`;
+});
 
-// slides.forEach(function(slide){
-//   console.log(slide.style.transform = `translate3d(${slick.clientWidth}, 0, 0)`);
-// });
   
 }
 
 
-
-
-// console.log(slick.clientWidth);
-
+window.onload = resize;
 window.onresize = resize;
+
+
+const nextBtn = document.querySelector('#next');
+const back = document.querySelector('#back');
+
+let counter = 1;
+
+nextBtn.addEventListener('click', function(){
+
+  const active = document.querySelectorAll('.slide-active');
+
+  slickTrack.style.transition = `transform 0.4s ease-in-out`;
+  counter++;
+
+  active[0].nextElementSibling.classList.add('slide-active');
+  active[0].classList.remove('slide-active');
+
+  slickTrack.style.transform = `translate3d(-${(slick.clientWidth * counter)}px, 0, 0)`;
+  
+});
+
+
+
+console.dir(document.querySelectorAll('.slick-slide') );
