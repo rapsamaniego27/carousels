@@ -50,12 +50,6 @@ html,body{
   position: relative;
 }
 
-.wrap h1{
-  position: absolute; 
-  top: 50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-}
 
 .wrap img{
   width: 100%;
@@ -69,3 +63,10 @@ section{
   background:#c1c1c1;
 }
 
+.texts{
+  position: absolute; 
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  color:#fff;
+}

@@ -1,3 +1,5 @@
+// Variable Declarations
+
 const slideshow = document.querySelector('.slideshow');
       slick = document.querySelector('.slick'),
       slickTrack = document.querySelector('.slick-track'),
@@ -25,6 +27,7 @@ const totalSlides = document.querySelectorAll('.slick-slide'),
 
 let counter = 1;
       
+// Slide Actions
 const slideAction = {
   goToSlide:function(i){
     slickTrack.style.transform = `translate3d(-${(slick.clientWidth * i)}px, 0, 0)`;
@@ -38,7 +41,7 @@ const slideAction = {
 
 function resize(){
 
-slickTrack.style.transition = "none";
+slideAction.transition('none');
 
 //slickTrack width 
 slideAction.goToSlide(counter);
@@ -51,11 +54,10 @@ totalSlides.forEach(function(slide){
   slide.style.width = `${slick.clientWidth}px`;
 });
 
-  
 }
 
 
-
+// Next Button
 nextBtn.addEventListener('click', function(){
 
   slideAction.transition(`transform 0.4s ease-in-out`);
@@ -66,7 +68,7 @@ nextBtn.addEventListener('click', function(){
   slideAction.goToSlide(counter);
   
 });
-
+// Prev Button
 prevBtn.addEventListener('click', function(){
 
   slideAction.transition(`transform 0.4s ease-in-out`);
@@ -78,7 +80,7 @@ prevBtn.addEventListener('click', function(){
   
 });
 
-
+// Do this when transition ends or after sliding
 slickTrack.addEventListener('transitionend', function(){
   slideAction.transition(`none`);
   if(counter > slides.length){
@@ -92,6 +94,10 @@ slickTrack.addEventListener('transitionend', function(){
   }
 });
 
+
+setInterval(function(){
+  nextBtn.click();
+}, 2000); 
 
 setTimeout(window.onload = resize, 10);
 
