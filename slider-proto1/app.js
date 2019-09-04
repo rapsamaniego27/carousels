@@ -1,7 +1,9 @@
 const slideshow = document.querySelector('.slideshow');
       slick = document.querySelector('.slick'),
       slickTrack = document.querySelector('.slick-track'),
-      slickList = document.querySelector('.slick-list');
+      slickList = document.querySelector('.slick-list'),
+      nextBtn = document.querySelector('#next'),
+      prevBtn = document.querySelector('#prev');
 
 let slides = document.querySelectorAll(".slick-slide:not(.cloned)"),
     slideCount = slides.length;
@@ -9,10 +11,10 @@ let slides = document.querySelectorAll(".slick-slide:not(.cloned)"),
 
 const cloneFirst = slides[0].cloneNode(true),
       cloneLast = slides[slides.length - 1].cloneNode(true);
-
-      slickTrack.appendChild(cloneFirst);
       
+      slickTrack.appendChild(cloneFirst);
       slickTrack.insertBefore(cloneLast, slides[0]);
+     
 
       // Re declare variables
 const totalSlides = document.querySelectorAll('.slick-slide'),
@@ -21,6 +23,7 @@ const totalSlides = document.querySelectorAll('.slick-slide'),
       totalSlides[0].classList.add('cloned');
       totalSlides[totalSlides.length - 1].classList.add('cloned');
 
+      
 function resize(){
 
 //slickTrack width 
@@ -45,24 +48,27 @@ function goToSlide(i){
 
 
 
-const nextBtn = document.querySelector('#next');
-const back = document.querySelector('#back');
-
 let counter = 1;
 
 
 
 nextBtn.addEventListener('click', function(){
 
-  const active = document.querySelectorAll('.slide-active');
-
   slickTrack.style.transition = `transform 0.4s ease-in-out`;
   counter++;
 
+  console.log(counter);
+
+  goToSlide(counter);
+  
+});
+
+prevBtn.addEventListener('click', function(){
+
+  slickTrack.style.transition = `transform 0.4s ease-in-out`;
+  counter--;
 
   console.log(counter);
-  // active[0].nextElementSibling.classList.add('slide-active');
-  // active[0].classList.remove('slide-active');
 
   goToSlide(counter);
   
@@ -75,10 +81,15 @@ slickTrack.addEventListener('transitionend', function(){
     slickTrack.style.transition = "none";
     goToSlide(counter);
   }
+
+  if (counter <= 0){
+    counter = slides.length;
+    slickTrack.style.transition = "none";
+    goToSlide(counter);
+  }
 });
 
 
-window.onload = resize;
-window.onresize = resize;
+setTimeout(window.onload = resize, 10);
 
-console.dir(document.querySelectorAll('.slick-slide') );
+window.onresize = resize;

@@ -11,6 +11,15 @@ html,body{
 
 }
 
+.arrow-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.arrow-wrapper i{
+  padding: 5px 40px;
+  cursor: pointer;
+}
 
 
 .slick-list{
@@ -22,28 +31,25 @@ html,body{
 
 
 .slick{
-  width:50%;
+  width:100%;
   margin: 0 auto;
   /* object-fit: none;
   object-position: 0 0; */
 }
 
 
-
 .slick-slide{
   float: left;
-  width: 50%;
 }
 
 .wrap{
   width:100%;
   object-fit: cover;
-  min-height: 400px;
+  min-height: 200px;
 }
 
 .wrap img{
   width: 100%;
-  
 }
 
 section{
