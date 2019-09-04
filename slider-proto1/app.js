@@ -16,18 +16,32 @@ const cloneFirst = slides[0].cloneNode(true),
       slickTrack.insertBefore(cloneLast, slides[0]);
      
 
-      // Re declare variables
+      // Re declare variables after cloning
 const totalSlides = document.querySelectorAll('.slick-slide'),
       totalSlideCount = totalSlides.length;
       
       totalSlides[0].classList.add('cloned');
       totalSlides[totalSlides.length - 1].classList.add('cloned');
 
+let counter = 1;
       
+const slideAction = {
+  goToSlide:function(i){
+    slickTrack.style.transform = `translate3d(-${(slick.clientWidth * i)}px, 0, 0)`;
+  },
+  transition:function(i){
+    slickTrack.style.transition = `${i}`;
+  }
+}
+
+
+
 function resize(){
 
+slickTrack.style.transition = "none";
+
 //slickTrack width 
-slickTrack.style.transform = `translate3d(-${slick.clientWidth}px, 0, 0)`;
+slideAction.goToSlide(counter);
 
 //total slickTrack width
 slickTrack.style.width = `${slick.clientWidth*totalSlideCount}px`;
@@ -40,52 +54,41 @@ totalSlides.forEach(function(slide){
   
 }
 
-function goToSlide(i){
-  slickTrack.style.transform = `translate3d(-${(slick.clientWidth * i)}px, 0, 0)`;
-}
-
-
-
-
-
-let counter = 1;
-
 
 
 nextBtn.addEventListener('click', function(){
 
-  slickTrack.style.transition = `transform 0.4s ease-in-out`;
+  slideAction.transition(`transform 0.4s ease-in-out`);
   counter++;
 
   console.log(counter);
 
-  goToSlide(counter);
+  slideAction.goToSlide(counter);
   
 });
 
 prevBtn.addEventListener('click', function(){
 
-  slickTrack.style.transition = `transform 0.4s ease-in-out`;
+  slideAction.transition(`transform 0.4s ease-in-out`);
   counter--;
 
   console.log(counter);
 
-  goToSlide(counter);
+  slideAction.goToSlide(counter);
   
 });
 
 
 slickTrack.addEventListener('transitionend', function(){
+  slideAction.transition(`none`);
   if(counter > slides.length){
     counter = 1;
-    slickTrack.style.transition = "none";
-    goToSlide(counter);
+    slideAction.goToSlide(counter);
   }
 
   if (counter <= 0){
     counter = slides.length;
-    slickTrack.style.transition = "none";
-    goToSlide(counter);
+    slideAction.goToSlide(counter);
   }
 });
 

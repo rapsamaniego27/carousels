@@ -11,6 +11,8 @@ html,body{
 
 }
 
+
+/* Arrows */
 .arrow-wrapper{
   display: flex;
   justify-content: center;
@@ -21,6 +23,7 @@ html,body{
   cursor: pointer;
 }
 
+/* Slideshow */
 
 .slick-list{
   position: relative;
@@ -31,7 +34,7 @@ html,body{
 
 
 .slick{
-  width:100%;
+  width:80%;
   margin: 0 auto;
   /* object-fit: none;
   object-position: 0 0; */
@@ -44,12 +47,20 @@ html,body{
 
 .wrap{
   width:100%;
-  object-fit: cover;
-  min-height: 200px;
+  position: relative;
+}
+
+.wrap h1{
+  position: absolute; 
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
 }
 
 .wrap img{
   width: 100%;
+  object-fit: cover;
+  height: 400px;
 }
 
 section{
