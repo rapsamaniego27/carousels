@@ -70,7 +70,7 @@ arrange(slides){
       this.newSlides[this.counter].classList.add('dulas--current');
       this.newSlides[this.counter].previousElementSibling.classList.remove('dulas--current');
 
-      this.freeze(true, e.target);
+      this.freeze(true, this.controls.nextEl);
     });
 
     /* Previous Button */
