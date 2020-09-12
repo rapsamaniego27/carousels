@@ -1,0 +1,21 @@
+
+.slide-row{
+  width:100%;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-track{
+  position: relative;
+
+}
+
+.slide{
+ float: left;
+ display: block;
+}
+
+.dulas--freeze{
+ pointer-events:none;
+}
