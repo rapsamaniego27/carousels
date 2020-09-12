@@ -1,17 +1,18 @@
+/* Dulas Built in CSS */
 
-.slide-row{
+.dulas-row{
   width:100%;
   display: block;
   overflow: hidden;
   position: relative;
 }
 
-.slide-track{
+.dulas-track{
   position: relative;
-
+  display:flex;
 }
 
-.slide{
+.dulas-slide{
  float: left;
  display: block;
 }

@@ -16,29 +16,11 @@ footer{
 }
 
 
-/* Slides */
+/* Custom Slides */
 
 .slide-container{
-  width: 1366px;
+  max-width: 1366px;
   margin: 0 auto;
-  border: 2px solid blue;
-}
-
-.slide-row{
-  width:100%;
-  display: block;
-  overflow: hidden;
-  position: relative;
-}
-
-.slide-track{
-  position: relative;
-
-}
-
-.slide{
- float: left;
- display: block;
 }
 
 

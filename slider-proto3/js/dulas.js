@@ -1,17 +1,24 @@
 class Dulas{
  constructor({sliderEl, controls, autoplay}){
-   this.sliderEl = sliderEl;
-   this.slideTrack = this.sliderEl.children[0];
-   this.slides = Array.from(this.slideTrack.children);
-   this.controls = controls;
-   this.autoplay = autoplay
-   this.counter = 1;
-   
-   /* Automatic runs */
-   this.newSlides = this.clone(this.slides);
-   this.arrange(this.newSlides);
-   this.bindControls();
-   this.autoSlide(this.autoplay);
+   if(sliderEl instanceof Element){
+     this.sliderEl = sliderEl;
+     this.slideTrack = this.sliderEl.children[0];
+     this.slides = Array.from(this.slideTrack.children);
+     this.controls = controls;
+     this.autoplay = autoplay
+     this.counter = 1;
+
+     /* Automatic runs */
+     this.newSlides = this.clone(this.slides);
+     this.delayArrange(this.newSlides);
+     this.setClasses();
+     this.bindControls();
+     this.autoSlide(this.autoplay);
+     this.autoResize();
+   }else{
+     console.error('No slider passed in');
+   }
+  
  }
 
  /* Arranges the slides */
@@ -21,7 +28,7 @@ arrange(slides){
 
    //Sets the overall width of Slide track based on how many slides there
    this.slideTrack.style.width = `${this.sliderEl.clientWidth * slides.length}px`;
-   
+
    this.slideTrack.style.transform = `translate3d(-${this.sliderEl.clientWidth * this.counter}px, 0, 0)`;
 
    //Each slide will have a width of the Slider Element or Row
@@ -74,8 +81,8 @@ arrange(slides){
 
      this.newSlides[this.counter].classList.add('dulas--current');
      this.newSlides[this.counter].nextElementSibling.classList.remove('dulas--current');
-
-     this.freeze(true, e.target);
+    
+     this.freeze(true, this.controls.prevEl);
   });
 
     /* Detects if its in the last or first clone 
@@ -126,10 +133,11 @@ arrange(slides){
  }
 
 /* Auto plays the slider */
+/* TODO: Add clear interval in the future when hovered */
  autoSlide(condition){
    if(condition == true){
      setInterval(() => {
-      this.controls.nextEl.click();
+       this.controls.nextEl.click();
      }, 2000);
    }
  }
@@ -143,6 +151,28 @@ arrange(slides){
   }
  }
 
+/* Auto resizes the slides when it shrinks */
+autoResize(){
+  window.addEventListener('resize', () => {
+    this.arrange(this.newSlides);
+  });
+}
 
+/* Sets Default classes of this Dulas plugin */
+setClasses(){
+  this.sliderEl.classList.add('dulas-row');
+  this.slideTrack.classList.add('dulas-track');
+  
+  this.newSlides.forEach(slide => {
+   slide.classList.add('dulas-slide');
+  });
+}
+
+/* Made a delay because the window calculates width too early  */
+delayArrange(slides){
+  setTimeout(window.onload = ()=>{
+    this.arrange(slides);
+  }, 10);
+}
 
 }
